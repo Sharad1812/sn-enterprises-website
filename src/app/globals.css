@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #0b1a2e;
+
+  /* Brand: Navy Blue */
+  --navy-950: #030b18;
+  --navy-900: #071a30;
+  --navy-800: #0b2545;
+  --navy-700: #113463;
+  --navy-600: #16437f;
+  --navy-500: #1c559f;
+
+  /* Brand: Cyan Accent */
+  --cyan-300: #7fe6f2;
+  --cyan-400: #35d6e8;
+  --cyan-500: #0ec6dc;
+  --cyan-600: #06a3b8;
+
+  /* Secondary Accent: Gold (from company logo, partner for cyan) */
+  --gold-300: #ffdd94;
+  --gold-400: #f5b942;
+  --gold-500: #e0a020;
+  --gold-600: #b9800a;
+
+  /* Neutral Graphite: realistic hardware tone for illustrations (no blue) */
+  --graphite-900: #15161a;
+  --graphite-800: #22242a;
+  --graphite-700: #2f323a;
+  --graphite-600: #3d4049;
+
+  /* Neutrals */
+  --gray-50: #f6f8fa;
+  --gray-100: #eef1f5;
+  --gray-200: #e2e7ed;
+  --gray-300: #cbd3dc;
+  --gray-600: #4b5768;
+  --gray-700: #2f3a4a;
+
+  --surface: #ffffff;
+  --surface-muted: var(--gray-50);
+  --border-subtle: var(--gray-200);
+}
+
+.dark {
+  --background: var(--navy-950);
+  --foreground: #eaf2f8;
+
+  --surface: var(--navy-900);
+  --surface-muted: #0a1f3a;
+  --border-subtle: #16304f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+  --color-navy-500: var(--navy-500);
+
+  --color-cyan-300: var(--cyan-300);
+  --color-cyan-400: var(--cyan-400);
+  --color-cyan-500: var(--cyan-500);
+  --color-cyan-600: var(--cyan-600);
+
+  --color-gold-300: var(--gold-300);
+  --color-gold-400: var(--gold-400);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+
+  --color-graphite-900: var(--graphite-900);
+  --color-graphite-800: var(--graphite-800);
+  --color-graphite-700: var(--graphite-700);
+  --color-graphite-600: var(--graphite-600);
+
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border-subtle: var(--border-subtle);
+
+  --font-sans: var(--font-inter);
+}
+
+* {
+  border-color: var(--border-subtle);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-muted);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--cyan-600);
+  border-radius: 999px;
+}
+
+/* Reusable effects */
+.glass {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--border-subtle);
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(90deg, var(--cyan-400), var(--cyan-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-hero-grid {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--cyan-400) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--cyan-400) 14%, transparent) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes led-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+.animate-led-blink {
+  animation: led-blink 1.6s ease-in-out infinite;
+}
+
+@keyframes wifi-ring {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.4);
+  }
+  70% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+.animate-wifi-ring {
+  animation: wifi-ring 2.6s ease-out infinite;
+  transform-origin: center;
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+
+.animate-dash-flow {
+  stroke-dasharray: 6 10;
+  animation: dash-flow 5s linear infinite;
+}
+
+.glow-hover {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.glow-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--cyan-500) 45%, transparent),
+    0 24px 48px -16px color-mix(in srgb, var(--cyan-500) 40%, transparent);
+}
+
+/* Realistic hardware panel: graphite (no blue) with a warm orange spotlight glow */
+.illustration-panel {
+  position: relative;
+  background: linear-gradient(to bottom right, var(--graphite-700), var(--graphite-900));
+  overflow: hidden;
+}
+
+.illustration-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--gold-500) 35%, transparent), transparent 65%);
+  pointer-events: none;
+}
+
+.orange-fade {
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold-500) 30%, transparent), transparent 70%);
+}
