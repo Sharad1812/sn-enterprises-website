@@ -37,7 +37,7 @@ export const testimonials: Testimonial[] = [
 export const faqs: FaqItem[] = [
   {
     question: "What areas do you provide IT and security services in?",
-    answer: `We are headquartered in ${siteConfig.contact.address.city}, ${siteConfig.contact.address.state}, with on-ground teams covering ${siteConfig.serviceAreas.join(", ")} — plus remote support available nationwide.`,
+    answer: `We have on-ground teams covering ${siteConfig.serviceAreas.join(", ")} — plus remote support available nationwide.`,
   },
   {
     question: "Do you offer Annual Maintenance Contracts (AMC)?",

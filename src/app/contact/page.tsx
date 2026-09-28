@@ -68,12 +68,6 @@ export default async function ContactPage({
                   >
                     {siteConfig.contact.email}
                   </a>
-                  <a
-                    href={`mailto:${siteConfig.contact.supportEmail}`}
-                    className="block text-sm text-gray-600 hover:text-cyan-600 dark:text-gray-300 dark:hover:text-cyan-400"
-                  >
-                    {siteConfig.contact.supportEmail}
-                  </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">

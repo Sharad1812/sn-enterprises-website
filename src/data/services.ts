@@ -222,18 +222,19 @@ export const services: Service[] = [
   },
   {
     slug: "computer-sales",
-    name: "Computer Sales",
+    name: "Computer & Laptop Sales",
     shortDescription: "Desktops, laptops, servers, and accessories from trusted brands.",
     description:
       "We supply and configure desktops, laptops, workstations, servers, and accessories from leading brands, backed by warranty support and optional AMC coverage.",
     icon: Monitor,
     photo: "/images/services/computer-sales.jpg",
     category: "computer-sales",
-    categoryLabel: "Computer Sales",
+    categoryLabel: "Computer & Laptop Sales",
     features: [
       "Desktop computers & workstations",
       "Custom gaming PCs",
       "Business laptops",
+      "Refurbished laptops",
       "Servers",
       "Printers & UPS",
       "Networking equipment & accessories",
@@ -249,6 +250,11 @@ export const services: Service[] = [
         question: "Do you offer bulk pricing for offices?",
         answer:
           "Yes, we offer competitive bulk pricing and configuration standardization for office and enterprise rollouts.",
+      },
+      {
+        question: "Do you sell refurbished laptops?",
+        answer:
+          "Yes, we stock quality-checked refurbished laptops at lower price points, backed by warranty support — a good fit for budget-conscious buyers and bulk office rollouts.",
       },
     ],
   },

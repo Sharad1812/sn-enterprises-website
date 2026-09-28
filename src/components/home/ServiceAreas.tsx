@@ -14,7 +14,7 @@ export function ServiceAreas() {
                 Where We Work
               </p>
               <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                Headquartered in {siteConfig.contact.address.city}, Serving Teams Across India
+                Serving Teams Across India
               </h2>
             </div>
 

@@ -42,10 +42,6 @@ interface TeamMember {
 
 export const team: TeamMember[] = [
   { name: siteConfig.founderName, role: "Founder & Director", initials: "RS", image: "/images/team/rohit-sharma.jpg" },
-  { name: "Sharad Prajapati", role: "Director of Network", initials: "SP", image: "/images/team/sharad-prajapati.jpg" },
-  { name: "Ritik", role: "Director of Security", initials: "RI" },
-  { name: "Rohit Tiwari", role: "Head of IT Support", initials: "RT" },
-  { name: "Saurabh Singh", role: "Director of Finance", initials: "SS" },
 ];
 
 export const whyChooseUs = [

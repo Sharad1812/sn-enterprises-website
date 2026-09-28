@@ -128,7 +128,7 @@ export function ChatbotWidget() {
         "Networking Solutions",
         "Wi-Fi Solutions",
         "Biometric Systems",
-        "Computer Sales",
+        "Computer & Laptop Sales",
       ]);
       return;
     }
@@ -174,7 +174,7 @@ export function ChatbotWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="glass fixed bottom-40 right-6 z-40 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl shadow-2xl"
+            className="fixed bottom-40 right-6 z-40 flex h-[520px] w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface shadow-2xl"
           >
             <div className="flex items-center gap-3 border-b border-border-subtle bg-navy-900 px-4 py-3.5 text-white">
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-300">

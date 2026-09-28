@@ -6,7 +6,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { FounderAvatar } from "@/components/about/FounderAvatar";
-import { TeamMemberAvatar } from "@/components/about/TeamMemberAvatar";
 import { siteConfig } from "@/data/site";
 import { certifications, coreValues, team } from "@/data/company";
 
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const [founder, ...restOfTeam] = team;
+  const [founder] = team;
 
   return (
     <>
@@ -121,18 +120,6 @@ export default function AboutPage() {
               </div>
             </div>
           </Reveal>
-
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {restOfTeam.map((member, i) => (
-              <Reveal key={member.name} delay={i * 0.08}>
-                <div className="rounded-2xl border border-border-subtle bg-surface p-6 text-center">
-                  <TeamMemberAvatar image={member.image} initials={member.initials} name={member.name} />
-                  <h3 className="mt-4 text-sm font-semibold text-foreground">{member.name}</h3>
-                  <p className="mt-1 text-xs text-gray-500">{member.role}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
 
           <div className="mt-14 text-center">
             <ButtonLink href="/contact">Work With Our Team</ButtonLink>

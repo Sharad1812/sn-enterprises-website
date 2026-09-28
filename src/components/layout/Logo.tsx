@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site";
 
-const LOGO_PATH = "/images/logo.png";
+const LOGO_PATH = "/images/logo.svg";
 
 export function Logo({ className }: { className?: string }) {
   const [failed, setFailed] = useState(false);
@@ -24,6 +24,7 @@ export function Logo({ className }: { className?: string }) {
         src={LOGO_PATH}
         alt={`${siteConfig.name} logo`}
         fill
+        unoptimized
         className="object-contain"
         sizes="40px"
         onError={() => setFailed(true)}

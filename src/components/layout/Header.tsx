@@ -8,7 +8,6 @@ import { mainNav } from "@/data/testimonials";
 import { services } from "@/data/services";
 import { siteConfig } from "@/data/site";
 import { ButtonLink } from "@/components/ui/Button";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Logo } from "@/components/layout/Logo";
 import { cn } from "@/lib/utils";
 
@@ -40,7 +39,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <Logo className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-navy-700 to-navy-900 text-sm font-bold ring-1 ring-cyan-500/30" />
+          <Logo className="flex h-12 w-32 items-center justify-center text-sm font-bold sm:h-14 sm:w-36" />
           <span className="text-lg font-bold tracking-tight text-foreground">
             {siteConfig.name}
           </span>
@@ -107,14 +106,12 @@ export function Header() {
             <Phone size={16} />
             {siteConfig.contact.phoneDisplay}
           </a>
-          <ThemeToggle />
           <ButtonLink href="/contact" size="sm">
             Get a Quote
           </ButtonLink>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
           <button
             type="button"
             aria-label="Toggle menu"

@@ -3,6 +3,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { RackIllustration } from "@/components/illustrations/RackIllustration";
 import { SwitchIllustration } from "@/components/illustrations/SwitchIllustration";
 import { WifiApIllustration } from "@/components/illustrations/WifiApIllustration";
+import { CctvCameraIllustration } from "@/components/illustrations/CctvCameraIllustration";
+import { FingerprintIllustration } from "@/components/illustrations/FingerprintIllustration";
+import { CoverageHeatmapIllustration } from "@/components/illustrations/CoverageHeatmapIllustration";
 
 const equipment = [
   {
@@ -19,6 +22,21 @@ const equipment = [
     title: "Enterprise Wi-Fi",
     description: "Aruba & D-Link access points delivering seamless wireless coverage.",
     Illustration: WifiApIllustration,
+  },
+  {
+    title: "CCTV Cameras",
+    description: "IP & analog cameras with NVR/DVR recording for round-the-clock surveillance.",
+    Illustration: CctvCameraIllustration,
+  },
+  {
+    title: "Access Control",
+    description: "Biometric and card-based access points integrated with your security policy.",
+    Illustration: FingerprintIllustration,
+  },
+  {
+    title: "Coverage Heat Mapping",
+    description: "Site surveys visualized as heat maps to plan camera and access point placement.",
+    Illustration: CoverageHeatmapIllustration,
   },
 ];
 

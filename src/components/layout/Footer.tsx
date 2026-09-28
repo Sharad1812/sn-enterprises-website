@@ -13,7 +13,7 @@ export function Footer() {
       <Container className="relative grid gap-10 py-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
           <Link href="/" className="flex items-center gap-2">
-            <Logo className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-sm font-bold ring-1 ring-cyan-400/30" />
+            <Logo className="flex h-12 w-32 items-center justify-center text-sm font-bold" />
             <span className="text-lg font-bold text-white">{siteConfig.name}</span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-gray-400">
@@ -68,12 +68,6 @@ export function Footer() {
               <Mail size={16} className="shrink-0 text-cyan-400" />
               <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-cyan-300">
                 {siteConfig.contact.email}
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail size={16} className="shrink-0 text-cyan-400" />
-              <a href={`mailto:${siteConfig.contact.supportEmail}`} className="hover:text-cyan-300">
-                {siteConfig.contact.supportEmail}
               </a>
             </li>
           </ul>
