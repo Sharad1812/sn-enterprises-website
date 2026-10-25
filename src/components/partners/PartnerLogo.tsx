@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 
 const MS_SQUARES = ["#F25022", "#7FBA00", "#00A4EF", "#FFB900"];
 
@@ -36,7 +37,7 @@ export function PartnerLogo({
   return (
     <div className="relative h-12 w-full">
       <Image
-        src={logo}
+        src={withBasePath(logo)}
         alt={`${name} logo`}
         fill
         className="object-contain object-left"

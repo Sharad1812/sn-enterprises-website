@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/basePath";
 
 const LOGO_PATH = "/images/logo.svg";
 
@@ -21,7 +22,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <span className={className} style={{ position: "relative", display: "inline-block" }}>
       <Image
-        src={LOGO_PATH}
+        src={withBasePath(LOGO_PATH)}
         alt={`${siteConfig.name} logo`}
         fill
         unoptimized

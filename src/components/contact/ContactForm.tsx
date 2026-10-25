@@ -8,6 +8,7 @@ import { Loader2, Send, CheckCircle2 } from "lucide-react";
 import { services } from "@/data/services";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { submitLead } from "@/lib/leads";
 
 const formSchema = z.object({
   name: z.string().min(2, "Please enter your full name"),
@@ -35,12 +36,8 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
   async function onSubmit(values: FormValues) {
     setStatus("idle");
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, source: "contact-form" }),
-      });
-      if (!res.ok) throw new Error("Request failed");
+      const ok = await submitLead({ ...values, source: "contact-form" });
+      if (!ok) throw new Error("Request failed");
       setStatus("success");
       reset();
     } catch {

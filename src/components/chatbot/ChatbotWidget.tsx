@@ -6,6 +6,7 @@ import { Bot, Loader2, MessageCircle, Send, User, X } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { buildBotReply, greetingMessage, leadCaptureSteps, type ChatMessage } from "@/lib/chatbot";
 import { cn } from "@/lib/utils";
+import { submitLead } from "@/lib/leads";
 
 type Mode = "chat" | "leadCapture" | "submitting" | "done";
 
@@ -48,23 +49,19 @@ export function ChatbotWidget() {
     pushBot(leadCaptureSteps[0].prompt);
   }
 
-  async function submitLead(finalData: Record<string, string>) {
+  async function handleLeadSubmit(finalData: Record<string, string>) {
     setMode("submitting");
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: finalData.name,
-          phone: finalData.phone,
-          email: finalData.email,
-          company: finalData.company && finalData.company.toLowerCase() !== "skip" ? finalData.company : undefined,
-          service: finalData.service,
-          message: finalData.requirement,
-          source: "chatbot",
-        }),
+      const ok = await submitLead({
+        name: finalData.name,
+        phone: finalData.phone,
+        email: finalData.email,
+        company: finalData.company && finalData.company.toLowerCase() !== "skip" ? finalData.company : undefined,
+        service: finalData.service,
+        message: finalData.requirement,
+        source: "chatbot",
       });
-      if (!res.ok) throw new Error("Request failed");
+      if (!ok) throw new Error("Request failed");
       pushBot(
         `Thanks, ${finalData.name}! Your requirement has been sent to our team — we'll reach out shortly. You can also call us at ${siteConfig.contact.phoneDisplay}.`,
         ["View our services", "Talk to a human"]
@@ -113,7 +110,7 @@ export function ChatbotWidget() {
 
       const isLast = leadStep === leadCaptureSteps.length - 1;
       if (isLast) {
-        submitLead(updated);
+        handleLeadSubmit(updated);
       } else {
         setLeadStep((s) => s + 1);
         pushBot(leadCaptureSteps[leadStep + 1].prompt);

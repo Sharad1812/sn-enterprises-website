@@ -12,6 +12,7 @@ import { DesktopIllustration } from "@/components/illustrations/DesktopIllustrat
 import { MaintenanceIllustration } from "@/components/illustrations/MaintenanceIllustration";
 import { CloudIllustration } from "@/components/illustrations/CloudIllustration";
 import { ServerUnitIllustration } from "@/components/illustrations/ServerUnitIllustration";
+import { withBasePath } from "@/lib/basePath";
 import type { IllustrationComponent } from "@/types";
 
 const illustrationsBySlug: Record<string, IllustrationComponent> = {
@@ -49,7 +50,7 @@ export function ServicePhoto({
 
   return (
     <Image
-      src={photo}
+      src={withBasePath(photo)}
       alt={name}
       fill
       className="object-cover"

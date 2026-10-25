@@ -7,8 +7,8 @@ export const siteConfig = {
   tagline: "Securing & Powering Your Digital Infrastructure",
   description:
     "Satya Narayan Enterprise delivers end-to-end IT infrastructure, CCTV security, structured networking, enterprise Wi-Fi, biometric access control, and computer sales & support for businesses across India.",
-  url: "https://www.satyanarayanenterprise.example.com",
-  ogImage: "/og-image.jpg",
+  url: "https://sharad1812.github.io/sn-enterprises-website",
+  ogImage: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/og-image.jpg`,
   founded: 2011,
   serviceAreas: ["Ranchi", "Delhi", "Gurugram", "Chennai", "Bengaluru", "Maharashtra", "Bihar", "Uttar Pradesh"],
   contact: {

@@ -6,18 +6,19 @@ solutions company (IT Solutions, CCTV, Networking, Wi-Fi, Biometric, Computer Sa
 ## Status
 
 The public-facing website is complete: all pages, sections, content, animations,
-and forms. Lead/quote submissions are validated, logged, and emailed (see **Email
-Setup** below). See **Next Phases** for what's still outstanding from the original
-brief (admin dashboard, database persistence, LLM chatbot, etc.).
+and forms. The site builds as a static export (see **Deployment** below) and is
+hosted on GitHub Pages. Lead/quote submissions are validated and sent via Formspree
+(see **Lead Notifications** below). See **Next Phases** for what's still outstanding
+from the original brief (admin dashboard, database persistence, LLM chatbot, etc.).
 
 ## Tech Stack
 
-- Next.js 16 (App Router) + React 19 + TypeScript
+- Next.js 16 (App Router, static export) + React 19 + TypeScript
 - Tailwind CSS v4 (CSS-first theme in `src/app/globals.css`)
 - Framer Motion (scroll reveals, hero animations)
-- next-themes (dark/light mode)
+- next-themes (dark/light mode, follows system preference — no manual toggle)
 - react-hook-form + zod (form validation)
-- nodemailer (Gmail SMTP lead notification emails)
+- Formspree (client-side lead notification emails — no server required)
 - lucide-react (icons; brand/social icons are hand-rolled SVGs in
   `src/components/ui/SocialIcons.tsx` since lucide-react no longer ships logo icons)
 
@@ -35,40 +36,39 @@ npm run build   # production build
 npm run lint    # eslint
 ```
 
-## Email Setup (required for lead notifications to actually send)
+## Lead Notifications (required for form submissions to actually send)
 
-Every contact/quote form submission POSTs to `/api/leads`, which validates and logs
-the lead, then emails it to `mailsne62@gmail.com` and `sharadrahne2001@gmail.com`
-(see `src/data/site.ts` → `contact.email` / `contact.supportEmail`). Without the
-steps below, leads are only visible in the server console — no email is sent.
+Every contact/quote form submission (`ContactForm` and the chatbot's lead capture
+flow, in `src/lib/leads.ts`) posts directly from the browser to a Formspree form —
+there is no backend/API route, which is required since the site is a static export.
+Without the steps below, submissions silently no-op (logged to the console only).
 
-1. On the sending Gmail account (`sharadrahne2001@gmail.com`), enable **2-Step
-   Verification**: Google Account → Security → 2-Step Verification.
-2. Generate an **App Password**: Google Account → Security → 2-Step Verification →
-   App passwords. Choose "Mail" as the app. Google gives you a 16-character password.
-3. Open `.env.local` in the project root (create it from `.env.local.example` if it
+1. Create a free form at [formspree.io](https://formspree.io) and copy its endpoint,
+   e.g. `https://formspree.io/f/xxxxxxxx`.
+2. Open `.env.local` in the project root (create it from `.env.local.example` if it
    doesn't exist) and fill in:
    ```
-   GMAIL_USER=sharadrahne2001@gmail.com
-   GMAIL_APP_PASSWORD=<the 16-character app password>
+   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/xxxxxxxx
    ```
-4. Restart the dev server. Submit a test quote from `/contact` and check both inboxes.
+3. Restart the dev server. Submit a test quote from `/contact` and confirm it lands
+   in the inbox configured on that Formspree form.
 
-`.env.local` is gitignored — never commit real credentials. When deploying, set
-these two variables in your hosting provider's environment variable settings instead.
+`.env.local` is gitignored — never commit real values. When deploying, set this
+variable as a **repository secret** or **build-time env var** in your CI/host so
+it's baked into the static build (see **Deployment** below).
 
 ## Project Structure
 
 ```
 src/
   app/                    Routes (App Router): home, about, services, partners,
-                          projects, contact, sitemap.xml, robots.txt, api/leads
+                          projects, contact, sitemap.xml, robots.txt
   components/
-    layout/               Header, Footer, PageHero, ThemeToggle, BackToTop, WhatsAppButton
+    layout/               Header, Footer, PageHero, BackToTop, WhatsAppButton
     home/                 Homepage sections (Hero, ServicesGrid, Testimonials, FAQ, ...)
     chatbot/              ChatbotWidget (rule-based assistant + lead capture)
     contact/              ContactForm (shared by homepage, /contact, and service inquiries)
-    about/                FounderAvatar, TeamMemberAvatar (photo with initials fallback)
+    about/                FounderAvatar (photo with initials fallback)
     partners/              PartnerLogo (real logo image with colored-text fallback)
     services/              ServicePhoto (real photo with illustration fallback)
     illustrations/        Hand-built SVG illustrations, used as fallbacks if a real
@@ -80,7 +80,8 @@ src/
   data/                   All site content — edit these files to change copy/data:
                           site.ts, services.ts, partners.ts, projects.ts,
                           testimonials.ts, company.ts
-  lib/                    utils.ts (cn helper), chatbot.ts (chatbot reply engine)
+  lib/                    utils.ts (cn helper), chatbot.ts (chatbot reply engine),
+                          leads.ts (Formspree submission helper)
   types/                  Shared TypeScript types
 ```
 
@@ -105,7 +106,7 @@ fallback if a file is missing or fails to load:
   the company name in that brand's color)
 - `public/images/services/` — one real photo per service (falls back to a matching
   hand-built illustration)
-- `public/images/logo.png` — company logo used in the header/footer (falls back to
+- `public/images/logo.svg` — company logo used in the header/footer (falls back to
   a stylized "SN" wordmark)
 
 ## Chatbot
@@ -117,15 +118,33 @@ to WhatsApp or a phone call. To upgrade it to a real LLM-backed assistant, repla
 the `buildBotReply` call in `ChatbotWidget.tsx` with a call to a server route that
 proxies an LLM API.
 
+## Deployment (GitHub Pages)
+
+The site builds as a static export (`output: "export"` in `next.config.ts`) and
+deploys to GitHub Pages via the GitHub Actions workflow in
+`.github/workflows/deploy.yml`, which runs on every push to `main`.
+
+One-time setup:
+
+1. In the repo on GitHub: **Settings → Pages → Source → GitHub Actions**.
+2. **Settings → Secrets and variables → Actions → New repository secret**:
+   add `NEXT_PUBLIC_FORMSPREE_ENDPOINT` with your Formspree endpoint so the build
+   has it baked in (client-side env vars must be present at build time).
+3. Push to `main` — the workflow builds and publishes to
+   `https://<username>.github.io/sn-enterprises-website/`.
+
+`next.config.ts` sets `basePath`/`assetPrefix` automatically when running inside
+GitHub Actions (detected via the `GITHUB_ACTIONS` env var), so local `npm run dev`
+and `npm run build` are unaffected and still serve from the root path.
+
 ## Next Phases (not yet built)
 
 Per the original requirements, still outstanding:
 
 - Database persistence (PostgreSQL/MongoDB) for leads and chatbot conversations —
-  currently leads are emailed but not stored anywhere queryable
+  currently leads go to Formspree but aren't stored anywhere queryable
 - Admin dashboard (inquiries, replies, service/project management, image uploads,
   partner logo management, chatbot conversation log, Excel export)
 - Admin authentication
 - LLM-backed chatbot responses + human escalation queue
 - Google Analytics integration
-- Deployment (e.g. Vercel)

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container } from "@/components/ui/Container";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { ContactFormWithParams } from "@/components/contact/ContactFormWithParams";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -10,14 +12,7 @@ export const metadata: Metadata = {
   description: `Get in touch with ${siteConfig.name} for IT infrastructure, CCTV, networking, Wi-Fi, biometric, or computer sales requirements.`,
 };
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ service?: string }>;
-}) {
-  const params = await searchParams;
-  const defaultService = params.service;
-
+export default function ContactPage() {
   const whatsappMessage = encodeURIComponent(
     `Hi ${siteConfig.name}, I'd like to enquire about your IT & security solutions.`
   );
@@ -105,7 +100,9 @@ export default async function ContactPage({
               Fill out the form and our team will reach out with a tailored solution.
             </p>
             <div className="mt-6">
-              <ContactForm defaultService={defaultService} />
+              <Suspense fallback={<ContactForm />}>
+                <ContactFormWithParams />
+              </Suspense>
             </div>
           </div>
         </Container>
