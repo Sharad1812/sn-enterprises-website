@@ -42,16 +42,16 @@ const equipment = [
 
 export function EquipmentShowcase() {
   return (
-    <section className="bg-navy-950 py-20 sm:py-28">
+    <section className="bg-background py-20 sm:py-28">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-300">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface-muted px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-300">
             What We Deploy
           </span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Real Infrastructure, Reliably Installed
           </h2>
-          <p className="mt-4 text-base text-gray-400">
+          <p className="mt-4 text-base text-gray-600 dark:text-gray-400">
             A look at the equipment behind our networking, server, and Wi-Fi deployments.
           </p>
         </div>
@@ -59,11 +59,13 @@ export function EquipmentShowcase() {
         <div className="mt-14 grid gap-6 sm:grid-cols-3">
           {equipment.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.1}>
-              <div className="glow-hover relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-                <div className="orange-fade absolute -top-10 h-40 w-40" />
-                <item.Illustration className="relative z-10 h-40 w-auto" />
-                <h3 className="mt-6 text-base font-semibold text-white">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-400">{item.description}</p>
+              <div className="glow-hover relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border-subtle bg-surface p-6 text-center">
+                <div className="illustration-panel group flex w-full items-center justify-center rounded-xl py-6">
+                  <div className="orange-fade absolute -top-10 left-1/2 h-40 w-40 -translate-x-1/2 transition-opacity duration-300 group-hover:opacity-100" />
+                  <item.Illustration className="relative z-10 h-40 w-auto transition-transform duration-300 ease-out group-hover:scale-110" />
+                </div>
+                <h3 className="mt-6 text-base font-semibold text-foreground">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{item.description}</p>
               </div>
             </Reveal>
           ))}

@@ -41,7 +41,10 @@ interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-  { name: siteConfig.founderName, role: "Founder & Director", initials: "RS", image: "/images/team/rohit-sharma.jpg" },
+  { name: siteConfig.founderName, role: "Founder & Director", initials: "RS", image: "/images/team/rohit-sharma.png" },
+  { name: "Abhinav Kumar Gupta", role: "Team Member", initials: "AG" },
+  { name: "Rohit Kumar Gupta", role: "Team Member", initials: "RG" },
+  { name: "Ayush Kumar", role: "Team Member", initials: "AK" },
 ];
 
 export const whyChooseUs = [

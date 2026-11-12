@@ -5,6 +5,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { testimonials } from "@/data/testimonials";
 
 export function Testimonials() {
+  if (testimonials.length === 0) return null;
+
   return (
     <section className="py-20 sm:py-28">
       <Container>

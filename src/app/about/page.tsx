@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const [founder] = team;
+  const [founder, ...members] = team;
 
   return (
     <>
@@ -121,8 +121,24 @@ export default function AboutPage() {
             </div>
           </Reveal>
 
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {members.map((member, i) => (
+              <Reveal key={member.name} delay={i * 0.08}>
+                <div className="flex h-full items-center gap-4 rounded-2xl border border-border-subtle bg-surface p-6">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-navy-700 to-navy-900 text-lg font-bold text-cyan-300 ring-2 ring-cyan-500/30">
+                    {member.initials}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground">{member.name}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{member.role}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
           <div className="mt-14 text-center">
-            <ButtonLink href="/contact">Work With Our Team</ButtonLink>
+            <ButtonLink href="mailto:mailsne62@gmail.com?subject=Enquiry%20from%20SN%20Enterprises%20Website">Work With Our Team</ButtonLink>
           </div>
         </Container>
       </section>

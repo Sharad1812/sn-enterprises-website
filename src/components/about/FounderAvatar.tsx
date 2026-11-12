@@ -24,13 +24,13 @@ export function FounderAvatar({
   }
 
   return (
-    <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-2xl ring-2 ring-cyan-500/40 sm:h-48 sm:w-48">
+    <div className="relative h-40 w-40 shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-navy-700 to-navy-950 ring-2 ring-cyan-500/40 sm:h-48 sm:w-48">
       <Image
         src={withBasePath(image)}
         alt={name}
         fill
-        className="object-cover"
-        style={{ objectPosition: "center 82%" }}
+        className="object-contain"
+        style={{ objectPosition: "center bottom" }}
         sizes="192px"
         onError={() => setFailed(true)}
       />

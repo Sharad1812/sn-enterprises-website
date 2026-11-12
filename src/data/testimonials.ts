@@ -1,38 +1,8 @@
 import type { Testimonial, FaqItem, StatItem, NavLink } from "@/types";
 import { siteConfig } from "@/data/site";
 
-export const testimonials: Testimonial[] = [
-  {
-    name: "Rohan Mehta",
-    role: "Operations Director",
-    company: "Manufacturing Client",
-    quote: `${siteConfig.name} upgraded our entire CCTV network without a single day of production downtime. Their team is professional, fast, and genuinely knows the technology.`,
-    rating: 5,
-  },
-  {
-    name: "Anita Sharma",
-    role: "IT Manager",
-    company: "IT Services Client",
-    quote:
-      "The structured cabling work for our new office was immaculate — clean, labeled, and fully certified. Exactly what we needed for a smooth office move.",
-    rating: 5,
-  },
-  {
-    name: "Vikram Nair",
-    role: "Facility Head",
-    company: "Healthcare Client",
-    quote:
-      "Their AMC support has been reliable for over two years now. Any issue we raise gets a fast response, and our systems just work.",
-    rating: 5,
-  },
-  {
-    name: "Priya Iyer",
-    role: "HR Head",
-    company: "Retail Client",
-    quote: `From biometric attendance to full office IT setup, ${siteConfig.name} handled everything as one team. Highly recommended for businesses that want a single reliable IT partner.`,
-    rating: 5,
-  },
-];
+// Add real client feedback here (Sajan Sharma and Rohit Tiwari, Physics Wallah).
+export const testimonials: Testimonial[] = [];
 
 export const faqs: FaqItem[] = [
   {

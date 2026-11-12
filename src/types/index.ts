@@ -40,7 +40,7 @@ export interface Project {
   industry: string;
   description: string;
   technologies: string[];
-  outcome: string;
+  outcome?: string;
 }
 
 export interface Testimonial {
